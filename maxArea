@@ -1,0 +1,50 @@
+import java.util.*;
+class Main {
+    public static void maxArea(int arr[]){
+        int maxarea = 0;
+        int nextSmallRight[] = new int[arr.length];
+        int nextSmallLeft[] = new int [arr.length];
+        
+        //next smaller rhs
+        Stack<Integer> s = new Stack<>();
+        
+        for(int i=arr.length-1;i>=0;i--){
+           while(!s.isEmpty() && arr[s.peek()] >= arr[i]){
+               s.pop();
+           }
+           if(s.isEmpty()){
+               nextSmallRight[i] = arr.length;
+           }else{
+               nextSmallRight[i] = s.peek();
+           }
+           s.push(i);
+        }
+        
+        //next smaller lhs
+         s = new Stack<>();
+        
+        for(int i=0;i<arr.length;i++){
+           while(!s.isEmpty() && arr[s.peek()] >= arr[i]){
+               s.pop();
+           }
+           if(s.isEmpty()){
+               nextSmallLeft[i] = -1;
+           }else{
+               nextSmallLeft[i] = s.peek();
+           }
+           s.push(i);
+        }
+        
+        for(int i=0;i<arr.length;i++){
+            int height =arr[i];
+            int width = nextSmallRight[i] - nextSmallLeft[i] - 1;
+            int currArea = height * width;
+            maxarea = Math.max(currArea ,maxarea);
+        }
+        System.out.println("max area in rectangle " + maxarea);
+    }
+    public static void main(String[] args) {
+        int arr[] = {2,4,3,8,3,4};
+        maxArea(arr);
+   }
+}
