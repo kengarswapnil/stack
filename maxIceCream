@@ -1,0 +1,24 @@
+import java.util.*;
+class Main {
+    public static int maxIceCream(List<Integer> price ,int  coins){
+        
+        Collections.sort(price);
+        int i =0;
+        int count = 0;
+        
+        while(i < price.size() && coins >= price.get(i)){
+            coins -= price.get(i);
+            count++;
+            i++;
+            
+        }
+        return count;
+        
+    }
+    public static void main(String[] args) {
+        List<Integer> costs = Arrays.asList(1, 3, 2, 4, 1);
+        int coins = 7;
+
+        System.out.println("Maximum ice creams you can buy: " + maxIceCream(costs, coins));
+    }
+}
