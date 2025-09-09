@@ -1,0 +1,27 @@
+import java.util.*;
+class Main {
+    public static int [] temp(int [] temp){
+        int n =temp.length;
+        int [] ans = new int[n];
+        Stack<Integer> s = new Stack<>();
+        
+        for(int i=0;i<n;i++){
+            while(!s.isEmpty() && temp[i] > temp[s.peek()]){
+                int pivot = s.pop();
+                ans[pivot] = i - pivot;
+            }
+            s.push(i);
+        }
+        return ans;
+    }
+    public static void main(String[] args) {
+        Main m  = new Main();
+        int temp [] = {70,71,72,73,69};
+        int res [] = m.temp(temp);
+        
+        for(int i :res){
+            System.out.print(i + " ");
+        }
+        
+    }
+}
